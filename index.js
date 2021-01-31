@@ -55,7 +55,7 @@ class Builder {
 function pluginInstaller(pluginDir, hotreload) {
     return {
         name: "plugin-installer",
-        async generateBundle({file, dir}) {
+        async writeBundle() {
             await copyNewer("{main.js,styles.css,manifest.json}", pluginDir, {verbose: true});
             if (hotreload) await fs.ensureFile(pluginDir+"/.hotreload");
         }
