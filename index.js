@@ -3,6 +3,8 @@ const commonjs      = require('@rollup/plugin-commonjs');
 const postcss       = require('rollup-plugin-postcss');
 const url           = require("postcss-url");
 const {basename}    = require("path");
+const fs            = require("fs-extra");
+const copyNewer     = require('copy-newer');
 
 module.exports = function builder() { return new Builder(); }
 
@@ -37,22 +39,25 @@ class Builder {
         return this.apply(c => c.plugins.push(...plugins));
     }
 
-    withReload(pluginName) {
+    withInstall(pluginName, hotreload=true) {
         if (process.env.OBSIDIAN_TEST_VAULT) {
             const pluginDir = process.env.OBSIDIAN_TEST_VAULT + "/.obsidian/plugins/" +  basename(pluginName);
-            return this.withPlugins(require('rollup-plugin-copy')({
-                verbose: true,
-                targets: [
-                    {src: "manifest.json", dest: pluginDir, copyOnce: true},
-                    {src: "manifest.json", dest: pluginDir, copyOnce: true, rename: ".hotreload", transform: () => ""},
-                    {src: ["main.js", "styles.css"], dest: pluginDir},
-                ]
-            }));
+            return this.withPlugins(pluginInstaller(pluginDir, hotreload));
         }
         return this;
     }
 
     build() {
          return this.cfg;
+    }
+}
+
+function pluginInstaller(pluginDir, hotreload) {
+    return {
+        name: "plugin-installer",
+        async generateBundle({file, dir}) {
+            await copyNewer("{main.js,styles.css,manifest.json}", pluginDir, {verbose: true});
+            if (hotreload) await fs.ensureFile(pluginDir+"/.hotreload");
+        }
     }
 }
