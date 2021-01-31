@@ -1,10 +1,10 @@
-const {nodeResolve} = require('@rollup/plugin-node-resolve');
-const commonjs      = require('@rollup/plugin-commonjs');
-const postcss       = require('rollup-plugin-postcss');
-const url           = require("postcss-url");
-const {basename}    = require("path");
-const fs            = require("fs-extra");
-const copyNewer     = require('copy-newer');
+const {nodeResolve}    = require('@rollup/plugin-node-resolve');
+const commonjs         = require('@rollup/plugin-commonjs');
+const postcss          = require('rollup-plugin-postcss');
+const url              = require("postcss-url");
+const {basename, join} = require("path");
+const fs               = require("fs-extra");
+const copyNewer        = require('copy-newer');
 
 module.exports = function builder() { return new Builder(); }
 
@@ -41,7 +41,7 @@ class Builder {
 
     withInstall(pluginName, hotreload=true) {
         if (process.env.OBSIDIAN_TEST_VAULT) {
-            const pluginDir = process.env.OBSIDIAN_TEST_VAULT + "/.obsidian/plugins/" +  basename(pluginName);
+            const pluginDir = join(process.env.OBSIDIAN_TEST_VAULT, ".obsidian/plugins", basename(pluginName));
             return this.withPlugins(pluginInstaller(pluginDir, hotreload));
         }
         return this;
