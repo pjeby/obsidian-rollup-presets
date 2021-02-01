@@ -14,6 +14,7 @@ class Builder {
             output: {
                 file: 'main.js',
                 format: 'cjs',
+                assetFileNames: "[name][extname]",
                 exports: 'default'
             },
             external: ['obsidian'],
