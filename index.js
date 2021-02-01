@@ -1,7 +1,6 @@
 const {nodeResolve}    = require('@rollup/plugin-node-resolve');
 const commonjs         = require('@rollup/plugin-commonjs');
-const postcss          = require('rollup-plugin-postcss');
-const url              = require("postcss-url");
+const styles           = require('rollup-plugin-styles');
 const {basename, join} = require("path");
 const fs               = require("fs-extra");
 const copyNewer        = require('copy-newer');
@@ -20,7 +19,7 @@ class Builder {
             external: ['obsidian'],
             plugins: [
                 nodeResolve({browser: true}),
-                postcss({extract: "styles.css", plugins: [url({url: "inline"})]}),
+                styles({ mode: ["extract", "styles.css"], url: {inline: true} }),
                 commonjs(),
             ]
         }
