@@ -58,14 +58,6 @@ function pluginInstaller(pluginDir, hotreload) {
         async writeBundle() {
             await copyNewer("{main.js,styles.css,manifest.json}", pluginDir, {verbose: true});
             if (hotreload) await fs.ensureFile(pluginDir+"/.hotreload");
-        },
-
-        // These are only needed until Obsidian switches to eval()
-        banner: "\n\n",
-        generateBundle(opts, bundle) {
-            if (bundle["main.js"]) {
-                bundle["main.js"].code = bundle["main.js"].code.slice(2);
-            }
         }
     }
 }
