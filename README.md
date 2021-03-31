@@ -13,7 +13,7 @@ export default builder().withInstall(__dirname).build():
 
 This will build a `styles.css` from any imported `.css` or `.scss` files, using `plugin.js` as the main entry point to roll up an output of `main.js`.  (URLS
 
-The  `withInstall(__dirname)` operation says, "if an `OBSIDIAN_TEST_VAULT` env variable is set, copy the built plugin to a hot-reload-capable installation directory (`$OBSIDIAN_TEST_VAULT/.obsidian/plugins/$(basename __dirname)`)".  If the `OBSIDIAN_TEST_VAULT` isn't set, no extra action is taken.
+The  `withInstall(__dirname)` operation says, "if an `OBSIDIAN_TEST_VAULT` env variable is set, copy the built plugin to a hot-reload-capable installation directory (`$OBSIDIAN_TEST_VAULT/.obsidian/plugins/$(basename __dirname)`)".  If the `OBSIDIAN_TEST_VAULT` isn't set, no extra action is taken.  (A `.hotreload` file will also be created, unless the second argument to `withInstall()` is false.)
 
 If you want to change the configuration in some way, `builder()` accepts a function that will be passed the configuration object, allowing it to be altered.  You can also call `.assign(object)` on the builder to set specific properties, or `.withPlugins(plugin,...)` to add more rollup plugins, or `.apply(func)` to call func with the configuration object.
 
