@@ -20,3 +20,17 @@ If you want to change the configuration in some way, `builder()` accepts a funct
 (So, if you'd rather, say, use `src/index.js` as the main entry point, you can just `.assign({input: "src/index.js"})` in the setup chain.)
 
 Mostly, though, what this package does is wrap the various node modules needed to do the building, so that my plugins only need this in their `devDependencies`.
+
+### Dependencies
+
+If a plugin project is pure Javascript, you should only need this and rollup in your package.json `devDependencies` to be able to build.   If you also need TypeScript, SCSS processing, or use modules that contain CSS, you may need some additional dependencies.
+
+These depedencies are defined as peer dependencies, so if you are installing with npm 7 or higher, they will be installed automatically; if you're using an older version of npm, or you're using yarn, you'll need to add them to package.json yourself (with `npm i -D` or `yarn add ... --dev`):
+
+#### TypeScript
+
+Add `typescript` and `@rollup/plugin-typescript` to your package's `devDependencies`, and `.withTypeScript()` to your `rollup.config.js`.  (You can pass in an options object, which will be passed along to @rollup/plugin-typescript.)
+
+#### SCSS and CSS
+
+Add `node-sass` to your package's `devDependencies`.

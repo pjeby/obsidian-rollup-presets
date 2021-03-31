@@ -40,6 +40,10 @@ class Builder {
         return this.apply(c => c.plugins.push(...plugins));
     }
 
+    withTypeScript(options) {
+        return this.apply(c => c.plugins.unshift(require("@rollup/plugin-typescript")(options)));
+    }
+
     withInstall(pluginName, hotreload=true) {
         if (process.env.OBSIDIAN_TEST_VAULT) {
             const pluginDir = join(process.env.OBSIDIAN_TEST_VAULT, ".obsidian/plugins", basename(pluginName));
