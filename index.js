@@ -15,7 +15,7 @@ class Builder {
                 file: 'main.js',
                 format: 'cjs',
                 assetFileNames: "[name][extname]",
-                sourceMap: 'inline',
+                sourcemap: 'inline',
                 exports: 'default'
             },
             external: ['obsidian'],
