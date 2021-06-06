@@ -41,7 +41,7 @@ class Builder {
     }
 
     withTypeScript(options) {
-        return this.apply(c => c.plugins.unshift(require("@rollup/plugin-typescript")(options)));
+        return this.withPlugins(require("@rollup/plugin-typescript")(options));
     }
 
     withInstall(pluginName, hotreload=true) {
