@@ -19,15 +19,15 @@
     "typescript": "4.1.3"
   },
   "peerDependencies": {
+    "@rollup/plugin-typescript": "^8",
     "node-sass": "^5",
-    "@rollup/plugin-typescript" : "^8",
     "typescript": "4.1.3"
   },
   "peerDependenciesMeta": {
-    "node-sass": {
+    "@rollup/plugin-typescript": {
       "optional": true
     },
-    "@rollup/plugin-typescript": {
+    "node-sass": {
       "optional": true
     },
     "typescript": {
