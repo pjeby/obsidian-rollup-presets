@@ -1,5 +1,9 @@
 # Rollup presets for building Obsidian plugins
 
+> This project has been discontinued, as I am now using [Ophidian](https://github.com/pjeby/ophidian) to build my plugins.  Its build system has about the same features as this and a similar API, but is much faster and needs fewer dependencies in the plugin's package.json.
+
+### Old Instructions
+
 This is just a way to minimize duplication in rollup.config.js across my various Obsidian plugin projects.
 
 You probably don't need or want it, but if you do, you should probably depend on a specific commit (e.g. `yarn add "pjeby/obsidian-rollup-presets#424242" -D`), because backward compatibility may not be maintained.
